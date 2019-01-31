@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+gg = 10.times.collect { Faker::Kpop.girl_groups }.uniq
+10.times do
+  u = User.create_fake!
+end

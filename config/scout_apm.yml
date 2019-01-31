@@ -1,0 +1,16 @@
+common: &defaults
+  key: key
+  name: rails_demo
+  monitor: false
+production:
+  <<: *defaults
+  monitor: true
+development:
+  <<: *defaults
+  name: rails_demo (dev)
+  dev_trace: true
+test:
+  <<: *defaults
+staging:
+  <<: *defaults
+  name: rails_demo (staging)

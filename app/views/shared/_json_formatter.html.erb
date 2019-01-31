@@ -1,0 +1,5 @@
+<script>
+  $.getJSON( document.location.href, function( data ) {
+    $('#json').append(JSON.stringify(data, null, 2));
+  });
+</script>
