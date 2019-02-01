@@ -11,7 +11,7 @@
   %tbody
     - @beers.each do |beer|
       %tr
-        %td= beer.brewary_db_id
+        %td= beer.brewarydb_id
         %td= link_to 'Show', beer
         %td= link_to 'Edit', edit_beer_path(beer)
         %td= link_to 'Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' }
