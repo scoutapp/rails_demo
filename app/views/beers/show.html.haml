@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Brewary db:
+  = @beer.brewary_db_id
+
+= link_to 'Edit', edit_beer_path(@beer)
+\|
+= link_to 'Back', beers_path

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do  
-  resources :users
   root to: 'home#show'
+
+  resources :users
+  resources :beers, only [:show, :index]
 end
