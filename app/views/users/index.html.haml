@@ -18,6 +18,8 @@
         %td= link_to 'Edit', edit_user_path(user)
         %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
 
+= paginate @users
+
 %br
 
 = link_to 'New User', new_user_path
