@@ -63,12 +63,10 @@ class UsersController < ApplicationController
 
   def followings
     @users = @user.followings
-    render 'show_follows'
   end
 
   def followers
     @users = @user.followers
-    render 'show_follower'
   end
 
   private

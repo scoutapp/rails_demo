@@ -1,25 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :set_relationship, only: [:show, :edit, :update, :destroy]
-
-  # GET /relationships
-  # GET /relationships.json
-  def index
-    @relationships = Relationship.all
-  end
-
-  # GET /relationships/1
-  # GET /relationships/1.json
-  def show
-  end
-
-  # GET /relationships/new
-  def new
-    @relationship = Relationship.new
-  end
-
-  # GET /relationships/1/edit
-  def edit
-  end
+  before_action :set_relationship, only: [:destroy]
 
   # POST /relationships
   # POST /relationships.json
@@ -28,24 +8,10 @@ class RelationshipsController < ApplicationController
 
     respond_to do |format|
       if @relationship.save
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
+        format.html { redirect_to followers_user_path(relationship_params[:follower_id]), notice: 'Followed' }
         format.json { render :show, status: :created, location: @relationship }
       else
         format.html { render :new }
-        format.json { render json: @relationship.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /relationships/1
-  # PATCH/PUT /relationships/1.json
-  def update
-    respond_to do |format|
-      if @relationship.update(relationship_params)
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully updated.' }
-        format.json { render :show, status: :ok, location: @relationship }
-      else
-        format.html { render :edit }
         format.json { render json: @relationship.errors, status: :unprocessable_entity }
       end
     end
@@ -56,7 +22,7 @@ class RelationshipsController < ApplicationController
   def destroy
     @relationship.destroy
     respond_to do |format|
-      format.html { redirect_to relationships_url, notice: 'Relationship was successfully destroyed.' }
+      format.html { redirect_to followings_user_path(params[:id]), notice: 'Unfollowed' }
       format.json { head :no_content }
     end
   end

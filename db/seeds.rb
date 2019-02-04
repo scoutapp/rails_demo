@@ -23,7 +23,7 @@ end
 
 def create_fake_users
   users = []
-  500.times do
+  1000.times do
     users << User.User.new(
       name: Faker::FunnyName.unique.name,
       email: Faker::Internet.unique.free_email,
@@ -36,7 +36,7 @@ end
 def create_fake_drink_histories
   100.times do
     drink_histories = []
-    100.times do
+    1000.times do
       drink_histories << DrinkHistory.new(user: User.find(User.pluck(:id).sample),
         beer: Beer.find(Beer.pluck(:id).sample),
         amount: Faker::Number.between(1, 10),
@@ -47,7 +47,7 @@ def create_fake_drink_histories
 end
 
 def create_fake_reviews
-  50.times do
+  500.times do
     reviews = []
     100.times do
       reviews << Review.new(user: User.find(User.pluck(:id).sample),
@@ -60,7 +60,26 @@ def create_fake_reviews
   end
 end
 
+def create_fake_relationships
+  existing_relations = []
+  500.times do
+    relationships = []
+    100.times do
+      # Without shuffle, earlier id users won't have any followers...
+      user_ids = User.where(id: User.pluck(:id).sample(2)).pluck(:id).shuffle
+      if !existing_relations.include? user_ids
+        existing_relations << user_ids
+        relationships << Relationship.new(follower_id: user_ids.first,
+          following_id: user_ids.last,
+          created_at: Faker::Date.between(3.years.ago, Date.today))
+      end
+    end
+    Relationship.import relationships
+  end
+end
+
 # store_beer_ids
 # create_fake_users
 # create_fake_drink_histories
-create_fake_reviews
+# create_fake_reviews
+create_fake_relationships
