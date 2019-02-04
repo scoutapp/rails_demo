@@ -22,7 +22,10 @@ end
 def create_fake_users
   users = []
   500.times do
-    users << User.new_fake!
+    users << User.User.new(
+      name: Faker::FunnyName.unique.name,
+      email: Faker::Internet.unique.free_email,
+    )
   end
   User.import users
 end

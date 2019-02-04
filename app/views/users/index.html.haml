@@ -5,8 +5,6 @@
     %tr
       %th Name
       %th Email
-      %th Language
-      %th Country
       %th
       %th
       %th
@@ -16,7 +14,6 @@
       %tr
         %td= user.name
         %td= user.email
-        %td= user.language
         %td= link_to 'Show', user
         %td= link_to 'Edit', edit_user_path(user)
         %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
