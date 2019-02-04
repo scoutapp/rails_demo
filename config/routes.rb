@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   resources :users
   resources :beers, only: [:show, :index]
+  resources :drink_histories
 end

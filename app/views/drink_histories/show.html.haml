@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @drink_history.user
+%p
+  %b Beer:
+  = @drink_history.beer
+
+= link_to 'Edit', edit_drink_history_path(@drink_history)
+\|
+= link_to 'Back', drink_histories_path

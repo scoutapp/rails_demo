@@ -1,0 +1,23 @@
+%h1 Listing drink_histories
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Beer
+      %th
+      %th
+      %th
+
+  %tbody
+    - @drink_histories.each do |drink_history|
+      %tr
+        %td= drink_history.user
+        %td= drink_history.beer
+        %td= link_to 'Show', drink_history
+        %td= link_to 'Edit', edit_drink_history_path(drink_history)
+        %td= link_to 'Destroy', drink_history, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Drink history', new_drink_history_path

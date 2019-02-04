@@ -1,0 +1,16 @@
+= form_for @drink_history do |f|
+  - if @drink_history.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@drink_history.errors.count, "error")} prohibited this drink_history from being saved:"
+      %ul
+        - @drink_history.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :beer
+    = f.text_field :beer
+  .actions
+    = f.submit 'Save'

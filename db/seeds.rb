@@ -19,7 +19,27 @@ def store_beer_ids
   Beer.import beers
 end
 
-10.times do
-  u = User.create_fake!
+def create_fake_users
+  users = []
+  500.times do
+    users << User.new_fake!
+  end
+  User.import users
 end
-store_beer_ids
+
+def create_fake_drink_histories
+  100.times do
+    drink_histories = []
+    100.times do
+      drink_histories << DrinkHistory.new(user: User.find(User.pluck(:id).sample),
+        beer: Beer.find(Beer.pluck(:id).sample),
+        amount: Faker::Number.between(1, 10),
+        created_at: Faker::Date.between(3.years.ago, Date.today))
+    end
+    DrinkHistory.import drink_histories
+  end
+end
+
+# store_beer_ids
+# create_fake_users
+create_fake_drink_histories
