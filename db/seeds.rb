@@ -14,7 +14,9 @@ def store_beer_ids
   # end
   beers = []
   CSV.foreach('data/brewarydb_ids.csv', encoding: 'UTF-8', headers: true, skip_blanks: true, force_quotes: true, quote_char: "\"") do |row|
-    beers << Beer.new(brewarydb_id: row['brewarydb_id'])
+    beers << Beer.new(brewarydb_id: row['brewarydb_id'],
+      created_at: Faker::Date.between(3.years.ago, Date.today)
+    )
   end
   Beer.import beers
 end
@@ -25,6 +27,7 @@ def create_fake_users
     users << User.User.new(
       name: Faker::FunnyName.unique.name,
       email: Faker::Internet.unique.free_email,
+      created_at: Faker::Date.between(3.years.ago, Date.today)
     )
   end
   User.import users
@@ -43,6 +46,21 @@ def create_fake_drink_histories
   end
 end
 
+def create_fake_reviews
+  50.times do
+    reviews = []
+    100.times do
+      reviews << Review.new(user: User.find(User.pluck(:id).sample),
+        beer: Beer.find(Beer.pluck(:id).sample),
+        rate: Faker::Number.between(1, 5),
+        comment: Faker::BojackHorseman.quote,
+        created_at: Faker::Date.between(3.years.ago, Date.today))
+    end
+    Review.import reviews
+  end
+end
+
 # store_beer_ids
 # create_fake_users
-create_fake_drink_histories
+# create_fake_drink_histories
+create_fake_reviews
