@@ -1,9 +1,19 @@
-%p#notice= notice
-
+= image_tag @beer.image_path_large
 %p
-  %b Brewary db:
-  = @beer.brewarydb_id
-
-= link_to 'Edit', edit_beer_path(@beer)
-\|
-= link_to 'Back', beers_path
+  %b Name:
+  = @beer.name
+%p
+  %b Description:
+  = @beer.description
+%p
+  %b Alcohol(%):
+  = "#{@beer.abv}%"
+%p
+  %b Still in Production:
+  = @beer.is_retired ? "YES" : "NO"
+%p
+  %b Organic:
+  = @beer.is_organic ? "YES" : "NO"
+%p
+  %b Created:
+  = @beer.created_at.strftime('%F')
