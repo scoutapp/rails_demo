@@ -15,7 +15,7 @@
         %td= user.name
         %td= user.email
         %td= link_to 'Show', user
-        %td= link_to 'Unfollow', relationship_url(id: Relationship.find_by(follower_id: current_user.id, following_id: user.id)), method: :delete, data: {confirm: 'Are you sure?' }
+        %td= link_to 'Unfollow', user_relationship_url(user_id: current_user.id, id: Relationship.find_by(follower_id: current_user.id, following_id: user.id)), method: :delete, data: {confirm: 'Are you sure?' }
 
 
 %br

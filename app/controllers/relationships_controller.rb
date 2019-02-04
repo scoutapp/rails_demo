@@ -22,7 +22,7 @@ class RelationshipsController < ApplicationController
   def destroy
     @relationship.destroy
     respond_to do |format|
-      format.html { redirect_to followings_user_path(params[:id]), notice: 'Unfollowed' }
+      format.html { redirect_to followings_user_path(params[:user_id]), notice: 'Unfollowed' }
       format.json { head :no_content }
     end
   end
