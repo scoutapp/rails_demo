@@ -1,4 +1,4 @@
-= image_tag @beer.image_path_large
+= @beer.image_path_large.present? ? (image_tag @beer.image_path_large, size: "512x512") : (image_tag 'bartender.png', size: "512x512")
 %p
   %b Name:
   = @beer.name

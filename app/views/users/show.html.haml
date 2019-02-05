@@ -23,7 +23,7 @@
   - DrinkHistory.where(user_id: @user.id).order("created_at desc").limit(10).each do |activity|
     %tr
       %td= link_to activity.beer.name, beer_path(activity.beer.id)
-      %td= activity.beer.image_path_medium ? (image_tag activity.beer.image_path_medium, size: "20x20") : ''
+      %td= activity.beer.image_path_medium.present? ? (image_tag activity.beer.image_path_medium, size: "20x20") : (image_tag 'bartender.png', size: "20x20")
       %td= activity.amount
       %td= activity.created_at.strftime('%F')
 
@@ -43,7 +43,7 @@
     %tr
       %td= link_to activity.user.name, user_path(activity.user)
       %td= link_to activity.beer.name, beer_path(activity.beer.id)
-      %td= activity.beer.image_path_medium ? (image_tag activity.beer.image_path_medium, size: "20x20") : ''
+      %td= activity.beer.image_path_medium.present? ? (image_tag activity.beer.image_path_medium, size: "20x20") : (image_tag 'bartender.png', size: "20x20")
       %td= activity.amount
       %td= activity.created_at.strftime('%F')
 
