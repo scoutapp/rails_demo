@@ -1,15 +1,13 @@
-%p#notice= notice
-
 %p
   %b Name:
   = @user.name
 %p
   %b Email:
   = @user.email
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+%p
+  = link_to 'Followers', followers_user_path(@user)
+  \|
+  = link_to 'Followings', followings_user_path(@user)
 
 %h2
   Your History
@@ -17,17 +15,15 @@
 %table
   %thead
     %tr
-      %th Name
       %th Beer
       %th
       %th Amount
       %th Date
   %tbody
-  - DrinkHistory.where(user_id: @user.id).order("created_at desc").limit(100).each do |activity|
+  - DrinkHistory.where(user_id: @user.id).order("created_at desc").limit(10).each do |activity|
     %tr
-      %td= link_to activity.user.name, user_path(activity.user)
       %td= link_to activity.beer.name, beer_path(activity.beer.id)
-      %td= activity.beer.image_path_small ? (image_tag activity.beer.image_path_small, size: "20x20") : ''
+      %td= activity.beer.image_path_medium ? (image_tag activity.beer.image_path_medium, size: "20x20") : ''
       %td= activity.amount
       %td= activity.created_at.strftime('%F')
 
@@ -43,10 +39,13 @@
       %th Amount
       %th Date
   %tbody
-  - DrinkHistory.where(user_id: @user.followings.pluck(:id)).order("created_at desc").limit(100).each do |activity|
+  - DrinkHistory.where(user_id: @user.followings.pluck(:id)).order("created_at desc").limit(10).each do |activity|
     %tr
       %td= link_to activity.user.name, user_path(activity.user)
       %td= link_to activity.beer.name, beer_path(activity.beer.id)
-      %td= activity.beer.image_path_small ? (image_tag activity.beer.image_path_small, size: "20x20") : ''
+      %td= activity.beer.image_path_medium ? (image_tag activity.beer.image_path_medium, size: "20x20") : ''
       %td= activity.amount
       %td= activity.created_at.strftime('%F')
+
+#json
+= render 'shared/json_formatter'

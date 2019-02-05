@@ -1,4 +1,4 @@
-%h1 Listing users
+%h1 Followers
 
 %table
   %thead
@@ -6,15 +6,12 @@
       %th Name
       %th Email
       %th
-      %th
-      %th
 
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.name
+        %td= link_to user.name, user
         %td= user.email
-        %td= link_to 'Show', user
         - if !current_user.following?(user)
           %td= link_to 'Follow', user_relationships_url(user_id: current_user.id, relationship: {follower_id: current_user.id, following_id: user.id}), method: :post
 
