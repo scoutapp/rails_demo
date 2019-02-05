@@ -10,6 +10,8 @@ class BeersController < ApplicationController
   # GET /beers/1
   # GET /beers/1.json
   def show
+    @reviews = Review.where(beer_id: @beer)
+    @events = @beer.events
   end
 
   private

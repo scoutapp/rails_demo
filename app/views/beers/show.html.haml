@@ -9,6 +9,9 @@
   %b Alcohol(%):
   = "#{@beer.abv}%"
 %p
+  %b Average rate:
+  = @reviews.average(:rate).round(2)
+%p
   %b Still in Production:
   = @beer.is_retired ? "YES" : "NO"
 %p
@@ -17,3 +20,40 @@
 %p
   %b Created:
   = @beer.created_at.strftime('%F')
+
+%h2
+  Reviews
+%table
+  %thead
+    %tr
+      %th Name
+      %th rate
+      %th comment
+      %th Date
+  %tbody
+  - @reviews.limit(10).order("created_at desc").each do |review|
+    %tr
+      %td= link_to review.user.name, user_path(review.user)
+      %td= review.rate
+      %td= review.comment
+      %td= review.created_at.strftime('%F')
+
+%h2
+  Events
+- if @events
+  %table
+    %thead
+      %tr
+        %th Name
+        %th rate
+        %th comment
+        %th Date
+    %tbody
+    - @beer.events.each do |review|
+      %tr
+        %td= link_to review.user.name, user_path(review.user)
+        %td= review.rate
+        %td= review.comment
+        %td= review.created_at.strftime('%F')  
+- else
+  There is no upcoming events

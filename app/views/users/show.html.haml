@@ -19,6 +19,7 @@
     %tr
       %th Name
       %th Beer
+      %th
       %th Amount
       %th Date
   %tbody
@@ -26,8 +27,9 @@
     %tr
       %td= link_to activity.user.name, user_path(activity.user)
       %td= link_to activity.beer.name, beer_path(activity.beer.id)
+      %td= activity.beer.image_path_small ? (image_tag activity.beer.image_path_small, size: "20x20") : ''
       %td= activity.amount
-      %td= activity.created_at
+      %td= activity.created_at.strftime('%F')
 
 %h2
   Friends History
@@ -37,12 +39,14 @@
     %tr
       %th Name
       %th Beer
+      %th
       %th Amount
       %th Date
   %tbody
   - DrinkHistory.where(user_id: @user.followings.pluck(:id)).order("created_at desc").limit(100).each do |activity|
     %tr
       %td= link_to activity.user.name, user_path(activity.user)
-      %td= activity.beer
+      %td= link_to activity.beer.name, beer_path(activity.beer.id)
+      %td= activity.beer.image_path_small ? (image_tag activity.beer.image_path_small, size: "20x20") : ''
       %td= activity.amount
-      %td= activity.created_at
+      %td= activity.created_at.strftime('%F')
