@@ -19,12 +19,6 @@ module PerformanceTest
 
   # Run benchmark test.
   # This could be rspec file, but to keep everything under this file, I'm putting here.
-  # I'm only comparing json string output speed since we can't use jbuilder to create serializable hash
-  # Result on my(Hiro) local: https://cl.ly/2b1202016284
-  #                       user       system     total       real
-  # fast_jsonapi(1000):   0.065895   0.000903   0.066798 (  0.069450)
-  # ams(1000):            0.311044   0.002982   0.314026 (  0.318097)
-  # jbuilder(1000):       0.079265   0.001000   0.080265 (  0.082538)
   def self.run
     # When log is noisy, please uncomment following
     ActiveSupport::Notifications.unsubscribe(ActiveModelSerializers::Logging::RENDER_EVENT)
@@ -35,23 +29,14 @@ module PerformanceTest
       # Use bmbm to avoid results depend on the order in which items are run
       results = Benchmark.bmbm do |x|
         x.report("fast_jsonapi(#{limit}):")   { fast_jsonapi }
-        x.report("ams(#{limit}):") { ams }
         x.report("jbuilder(#{limit}):")  { jbuilder }
       end
     end
   end
 
   private
-  def self.ams
-    # Sample
-    # ActiveModelSerializers::SerializableResource.new(
-    #   @users,
-    #   each_serializer: UserAmsSerializer
-    # ).serializable_hash.to_json
-  end
   def self.fast_jsonapi
-    # Sample
-    # UserSerializer.new(@users).serialized_json
+    UserSerializer.new(@users).serialized_json
   end
   def self.jbuilder
     # NOTE: this is sample from _user.json.jbuilder
