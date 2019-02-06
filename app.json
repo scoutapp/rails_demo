@@ -1,0 +1,65 @@
+{
+  "name": "Scout APM Rails demo app",
+  "repository": "https://github.com/scoutapp/rails_demo",
+  "scripts": {
+    "postdeploy": ""
+  },
+	"env": {
+    "LANG": {
+      "value": "en_US.UTF-8",
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "DOMAIN_NAME": {
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "required": false
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": false
+    },
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    },
+    "RAILS_MASTER_KEY": {
+      "required": false
+    }
+	},
+  "formation": {
+    "web": { "quantity": 1 },
+    "worker": { "quantity": 1 }
+	},
+  "addons": [
+    "heroku-redis",
+    "heroku-postgresql"
+	],
+  "environments": {
+    "review": {
+      "env": {
+        "HEROKU_APP_NAME": {
+            "required": true
+        },
+        "HEROKU_PARENT_APP_NAME": {
+            "required": true
+        }
+      }
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
