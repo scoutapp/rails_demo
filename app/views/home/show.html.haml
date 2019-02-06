@@ -1,0 +1,11 @@
+%h1
+  Rails Demo App by
+  = link_to image_tag("logo.png", height: "25px"), "https://scoutapp.com/"
+
+- if ENV["SCOUT_DEV_TRACE"]
+  %p DevTrace is enabled. Click on the panel in the bottom left corner to view it.
+- else
+  %p DevTrace isn't enabled. Enable it by restarting the rails server with:
+  %pre
+    %code
+      SCOUT_DEV_TRACE=true rails server
