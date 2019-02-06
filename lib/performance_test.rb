@@ -36,8 +36,7 @@ module PerformanceTest
 
   private
   def self.fast_jsonapi
-    # Sample
-    # UserSerializer.new(@users).serialized_json
+    UserSerializer.new(@users).serialized_json
   end
   def self.jbuilder
     # NOTE: this is sample from _user.json.jbuilder
