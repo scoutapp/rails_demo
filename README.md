@@ -4,7 +4,7 @@ This is the demo app of Scout, use it for events or demo for potential customers
 
 ## Dependencies
 
-* Ruby 2.5.3 (If you're using RVM, you can install it with `rvm install 2.5.3`)
+* Ruby 2.6.1 (If you're using RVM, you can install it with `rvm install 2.6.1`)
 * Postgres
 
 ## Installation
