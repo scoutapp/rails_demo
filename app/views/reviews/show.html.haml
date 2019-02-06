@@ -8,11 +8,7 @@
   = @review.comment
 %p
   %b User:
-  = @review.user
+  = link_to @review.user.name, @review.user
 %p
   %b Beer:
-  = @review.beer
-
-= link_to 'Edit', edit_review_path(@review)
-\|
-= link_to 'Back', reviews_path
+  = link_to @review.beer.name, @review.beer

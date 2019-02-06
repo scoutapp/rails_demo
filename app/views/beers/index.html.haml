@@ -3,19 +3,22 @@
 %table
   %thead
     %tr
-      %th Brewary db
+      %th Name
       %th
-      %th
-      %th
+      %th Description
+      %th Alcohol(%)
+      %th Average rate
+      %th Created
 
   %tbody
     - @beers.each do |beer|
       %tr
-        %td= beer.brewarydb_id
-        %td= link_to 'Show', beer
-        -# %td= link_to 'Edit', edit_beer_path(beer)
-        -# %td= link_to 'Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to beer.name, beer
+        %td= beer.image_path_medium.present? ? (image_tag beer.image_path_medium, size: "20x20") : (image_tag 'bartender.png', size: "20x20")
+        %td= beer.description
+        %td= beer.abv
+        %td= beer.average_rate
+        %td= beer.created_at.strftime('%F')
+
 
 %br
-
-= link_to 'New Beer', new_beer_path

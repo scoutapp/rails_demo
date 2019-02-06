@@ -16,12 +16,9 @@
       %tr
         %td= review.rate
         %td= review.comment
-        %td= review.user
-        %td= review.beer
+        %td= link_to review.user.name, review.user
+        %td= link_to review.beer.name, review.beer
+        %td= review.created_at.strftime('%F')
         %td= link_to 'Show', review
-        -# %td= link_to 'Edit', edit_review_path(review)
-        -# %td= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
-
-= link_to 'New Review', new_review_path

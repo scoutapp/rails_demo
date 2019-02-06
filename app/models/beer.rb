@@ -1,5 +1,6 @@
 class Beer < ApplicationRecord
   has_many :drink_histories
+  has_many :reviews
 
   def events
     get('events')
@@ -11,6 +12,10 @@ class Beer < ApplicationRecord
 
   def breweries
     get('breweries')
+  end
+
+  def average_rate
+    reviews.average(:rate).round(2).to_f
   end
 
   def get(path)
