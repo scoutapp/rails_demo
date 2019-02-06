@@ -8,7 +8,7 @@ module PerformanceTest
       route_key = User.model_name.route_key
 
       # add empty string to request index page too
-      model.first(limit).pluck(:id).push('').each do |id|
+      model.all.pluck(:id).sample(limit).push('').each do |id|
         url = "#{host}/#{route_key}/#{id}"
         p url
         HTTParty.get(url)
