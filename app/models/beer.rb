@@ -19,7 +19,12 @@ class Beer < ApplicationRecord
   end
 
   def get(path)
-    base_brewary_db_url = "https://sandbox-api.brewerydb.com/v2"
-    HTTParty.get("#{base_brewary_db_url}/beer/#{self.brewarydb_id}/#{path}",  query: {key: Rails.application.credentials.brewerydb_api_key})['data']
+    # use HTTP request only in production env, since we don't want to share 
+    if Rails.env == "production" || ENV['BREWARYDB_API_KEY']
+      base_brewary_db_url = "https://sandbox-api.brewerydb.com/v2"
+      HTTParty.get("#{base_brewary_db_url}/beer/#{self.brewarydb_id}/#{path}",  query: {key: Rails.application.credentials.brewerydb_api_key})['data']
+    else
+      nil
+    end
   end
 end
