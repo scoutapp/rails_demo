@@ -1,3 +1,6 @@
+#json
+= render 'shared/json_formatter'
+
 %p
   %b Name:
   = @user.name
@@ -46,6 +49,3 @@
       %td= activity.beer.image_path_medium.present? ? (image_tag activity.beer.image_path_medium, size: "20x20") : (image_tag 'bartender.png', size: "20x20")
       %td= activity.amount
       %td= activity.created_at.strftime('%F')
-
-#json
-= render 'shared/json_formatter'
