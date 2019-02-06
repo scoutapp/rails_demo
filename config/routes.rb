@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
   resources :drink_histories, only: [:show, :index]
   resources :reviews, only: [:show, :index]
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end

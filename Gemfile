@@ -24,8 +24,15 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+# [Faster JSON](https://buttercms.com/blog/json-serialization-in-rails-a-complete-guide)
+gem 'oj'
+gem 'active_model_serializers'
+gem 'fast_jsonapi'
+
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
+# background job
+gem 'sidekiq'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
