@@ -15,7 +15,11 @@ class Beer < ApplicationRecord
   end
 
   def average_rate
-    reviews.average(:rate).round(2).to_f
+    if reviews.any?
+      reviews.average(:rate).round(2).to_f
+    else
+      0
+    end
   end
 
   def get(path)
